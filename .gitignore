@@ -1,0 +1,7 @@
+*/
+!*nvim/
+nvim/*
+!*nvim/init.vim
+
+.DS_Store
+
