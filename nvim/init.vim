@@ -13,6 +13,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/fzf.vim'
     Plug 'itchyny/lightline.vim'
     Plug 'vim-airline/vim-airline'
+    Plug 'tpope/vim-fugitive'
 call plug#end()
 
 " Config
@@ -62,6 +63,9 @@ let $FZF_DEFAULT_OPTS = '--reverse'
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
+
+nnoremap <C-p> :GFiles<Cr>
+nnoremap <C-g> :Rg<Cr>
 
 autocmd CompleteDone * silent! pclose!
 
