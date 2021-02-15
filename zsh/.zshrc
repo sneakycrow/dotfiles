@@ -1,3 +1,4 @@
+zmodload zsh/zprof
 #If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -8,7 +9,6 @@ export ZSH=/Users/ZSohov/.oh-my-zsh
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME=""
-
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
 # cause zsh load theme from this variable instead of
@@ -60,10 +60,7 @@ COMPLETION_WAITING_DOTS="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  osx
   zsh-syntax-highlighting
-  git-flow
-  zsh-256color
   zsh-completions
   zsh-autosuggestions
 )
@@ -92,16 +89,11 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Custom Aliases
 alias ls="exa -la"
-alias python="python3"
+alias python="/usr/local/bin/python3"
 alias pip="pip3"
 alias vim="nvim"
 
 # Custom Commands
-function dstop() { docker stop $(docker ps -a -q); }
-function md5pwd() {
-    /bin/echo "{md5}"`/bin/echo -n $1 | openssl dgst -binary -md5 | openssl enc -base64`;
-}
-
 function removecontainers() {
     docker stop $(docker ps -aq)
     docker rm $(docker ps -aq)
@@ -115,7 +107,7 @@ function armaggedon() {
     docker rmi -f $(docker images -qa)
 }
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+# RVM Export.
 export PATH="$PATH:$HOME/.rvm/bin"
 
 # GoPath
@@ -131,14 +123,9 @@ fpath+=~/.zfunc
 # Stop all autocorrect
 unsetopt correct_all
 
-## Starship Prompt
-eval "$(starship init zsh)"
-
 ## Zoxide
 eval "$(zoxide init zsh)"
 
-## NVM
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
-alias python=/usr/local/bin/python3
+# Starship Prompt 
+eval "$(starship init zsh)"
+zprof
