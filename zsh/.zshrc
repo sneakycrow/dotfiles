@@ -1,4 +1,4 @@
-zmodload zsh/zprof
+# zmodload zsh/zprof
 #If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -107,6 +107,11 @@ function armaggedon() {
     docker rmi -f $(docker images -qa)
 }
 
+timezsh() {
+  shell=${1-$SHELL}
+  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
+}
+
 # RVM Export.
 export PATH="$PATH:$HOME/.rvm/bin"
 
@@ -127,5 +132,7 @@ unsetopt correct_all
 eval "$(zoxide init zsh)"
 
 # Starship Prompt 
+export SPACESHIP_TIME_SHOW=true
 eval "$(starship init zsh)"
-zprof
+
+# zprof
